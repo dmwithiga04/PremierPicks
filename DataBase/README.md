@@ -28,12 +28,10 @@ To set up and start the database, follow these steps:
    - Execute `init.sql` to create the `movies` table and insert initial movie data.
 
 3. **Accessing the Database**:
-   - MySQL is exposed on port `4040` (mapped from `3308` port).
+   - MySQL is exposed on port `3306`
    - Use your MySQL client of choice to connect:
      - **Host**: `localhost`
-     - **Port**: `4040`
-     - **User**: `exampleUser`
-     - **Password**: `pwd12345`
+     - **Password**: `premier-picks`
 
    Example connection command:
    ```bash
@@ -80,7 +78,7 @@ docker-compose up -d
 
 ## Troubleshooting
 
-- **Port Conflicts**: Ensure that port `4040` is not in use by other services.
+- **Port Conflicts**: Ensure that port `3306` is not in use by other services.
 - **Access Issues**: Verify that the credentials in `docker-compose.yml` match those in your MySQL client.
 
 ## Additional Resources
