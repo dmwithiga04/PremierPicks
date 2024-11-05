@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-PremierPicks-DB
+    environment:
+      #! NOTE: Have to create db name here for user to have access to db
+      MYSQL_DATABASE: movieDB
+      MYSQL_USER: exampleUser
+      MYSQL_PASSWORD: pwd12345
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - '4040:3308'
+    networks:
+      - backnet
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/1.sql
+
+networks:
+  backnet:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
