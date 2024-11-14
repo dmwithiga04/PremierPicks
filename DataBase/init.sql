@@ -1,12 +1,12 @@
-create table if not exists movieDB.movies
+CREATE TABLE IF NOT EXISTS movieDB.movies
 (
-    Title       varchar(100),
-    Rating      double,
-    Year        int,
-    Certificate varchar(50),
-    Runtime     int,
-    Stars       varchar(200),
-    Genre       varchar(80)
+    Title       VARCHAR(100),
+    Rating      DOUBLE,
+    Year        INT,
+    Certificate VARCHAR(50),
+    Runtime     INT,
+    Stars       VARCHAR(200),
+    Genre       VARCHAR(80)
 );
 
 INSERT INTO movieDB.movies (Title, Rating, Year, Certificate, Runtime, Stars, Genre) VALUES ('12 Years a Slave', 8.1, 2013, 'R', 134, 'Chiwetel Ejiofor, Michael Kenneth Williams, Michael Fassbender, Brad Pitt', 'Biography, Drama, History');
