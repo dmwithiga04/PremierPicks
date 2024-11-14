@@ -70,7 +70,9 @@ This will re-run `init.sql` and apply any updates.
 
 ---
 
-**Note**: If `mysql-data` (the data volume) already contains data, changes to `init.sql` may not apply automatically. To apply changes to the schema or data, remove the volume first:
+**Note**: If `mysql-data` (the data volume) already contains data, changes to `init.sql` may not apply automatically. To apply changes to the schema or data, remove the volume first. 
+
+**This also applies the database is not working or by any chance lose any movie data**:
 ```bash
 docker-compose down -v
 docker-compose up -d
