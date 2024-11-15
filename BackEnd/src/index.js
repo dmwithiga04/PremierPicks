@@ -1,8 +1,9 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function(req, res){
+app.post('/search', function(req, res){
    res.send("Hello world!");
+   console.log(res);
 });
 
 app.listen(4000);
