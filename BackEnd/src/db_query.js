@@ -15,14 +15,3 @@ const con = mysql.createConnection({
     database: "movieDB",
   });
 
-// Query the database
-con.connect(function (err) {
-    con.query(
-        "select  * from movies limit ?",
-        [20],
-        function (err, result, fields) {
-            if (err) throw err;
-            console.log(result);
-        }
-    );
-});

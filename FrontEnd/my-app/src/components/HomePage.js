@@ -13,7 +13,7 @@ const HomePage = () => {
           This is just a test homepage to get a hang of React! c: <br />
         </p>
 
-        <form action='http://localhost:4000/search' method='post' >
+        <form action='http://localhost:4000/search' method='get' >
           <label htmlFor="search">Search bar:</label>
           <input type="search" name="search" id="search" />
           <input type="submit" value="Submit" />
