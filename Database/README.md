@@ -21,6 +21,7 @@ To set up and start the database, follow these steps:
 2. **Run the Docker Compose command**:
    ```bash
    docker-compose up -d
+   docker-compose start
    ```
    This command will:
    - Pull the MySQL image if it’s not already available locally.
@@ -32,11 +33,6 @@ To set up and start the database, follow these steps:
    - Use your MySQL client of choice to connect:
      - **Host**: `localhost`
      - **Password**: `premier-picks`
-
-   Example connection command:
-   ```bash
-   mysql -h 127.0.0.1 -P 4040 -u exampleUser -p
-   ```
 
 ## Database Schema
 
@@ -62,8 +58,9 @@ This database is configured for **read-only** access, meaning data should only b
 
 To modify the initial data or database structure, update the `init.sql` file and restart the container:
 ```bash
-docker-compose down
+docker-compose down -v
 docker-compose up -d
+docker-compose start
 ```
 
 This will re-run `init.sql` and apply any updates.
@@ -76,6 +73,7 @@ This will re-run `init.sql` and apply any updates.
 ```bash
 docker-compose down -v
 docker-compose up -d
+docker-compose start
 ```
 
 ## Troubleshooting
