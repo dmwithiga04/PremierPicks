@@ -5,7 +5,6 @@
 // Import the mysql module
 const mysql = require("mysql2");
 
-
 // Create a connection to the database
 const con = mysql.createConnection({
     host: "localhost", // Use "localhost" if Node.js is outside Docker
@@ -13,16 +12,24 @@ const con = mysql.createConnection({
     user: "root",
     password: "premier-picks",
     database: "movieDB",
-  });
+});
+
+// Connect to the database
+con.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected to the database!");
+});
 
 // Query the database
-con.connect(function (err) {
+function search(searchTerm, callback) {
     con.query(
-        "select  * from movies limit ?",
-        [20],
+        "SELECT * FROM movies WHERE Title LIKE ? LIMIT 10",
+        [`%${searchTerm}%`],
         function (err, result, fields) {
-            if (err) throw err;
-            console.log(result);
+            if (err) return callback(err, null);
+            callback(null, result);
         }
     );
-});
+}
+
+module.exports = { search };
