@@ -1,0 +1,23 @@
+/*result table styling*/
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
+
+th {
+    text-align: left;
+    font-size: 30px;
+    color: rgb(50, 188, 212);
+    padding: 20px;
+
+}
+
+td {
+    text-align: justify;
+    padding: 20px;
+    font-size: 15px;
+    color:whitesmoke;
+    
+}

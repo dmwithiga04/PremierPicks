@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SearchResults from "./SearchResults"; // Correctly import the SearchResults component
-import "./HomePage.css";
+import "./styles/HomePage.css";
 
 const HomePage = () => {
   // State variables
@@ -13,6 +13,7 @@ const HomePage = () => {
   const handleSearch = async (event) => {
     // Prevent the default form submission behavior
     event.preventDefault();
+    setSearchResults([]); // Clear previous search results
 
     // Make a request to the backend to search for movies
     try {
@@ -41,18 +42,18 @@ const HomePage = () => {
         </p>
         {/* The form below is used to search for movies */}
         <form onSubmit={handleSearch}>
+        <label for="lname">Search Movie Info: </label>
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search..."
           />
-          <button type="submit">Search</button>
+          <button type="Search">Search</button>
         </form>
 
         {/* Display search results */}
         <SearchResults searchResults={searchResults} />
-        
       </main>
     </div>
   );
