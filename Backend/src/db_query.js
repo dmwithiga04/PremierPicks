@@ -23,7 +23,7 @@ con.connect(function (err) {
 // Query the database
 function search(searchTerm, callback) {
     con.query(
-        "SELECT * FROM movies WHERE Title LIKE ? LIMIT 10",
+        "SELECT * FROM movies WHERE Title LIKE ? ORDER BY Rating DESC LIMIT 15",
         [`%${searchTerm}%`],
         function (err, result, fields) {
             if (err) return callback(err, null);
