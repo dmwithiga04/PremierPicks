@@ -1,18 +1,18 @@
 // This file contains the code for the homepage of the app.
 import React, { useState } from "react";
 import axios from "axios";
+import SearchResults from "./SearchResults"; // Correctly import the SearchResults component
 import "./HomePage.css";
 
 const HomePage = () => {
   // State variables
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
 
   // Function to handle search form submission
   const handleSearch = async (event) => {
+    // Prevent the default form submission behavior
     event.preventDefault();
-    setErrorMessage(""); // Reset error message
 
     // Make a request to the backend to search for movies
     try {
@@ -26,7 +26,6 @@ const HomePage = () => {
       setSearchResults(response.data);
     } catch (error) {
       console.error("Error fetching search results:", error);
-      setErrorMessage("Failed to fetch search results. Please try again.");
     }
   };
 
@@ -40,7 +39,7 @@ const HomePage = () => {
         <p>
           This is just a test homepage to get a hang of React! c: <br />
         </p>
-        {/*The form below is used to search for movies*/}
+        {/* The form below is used to search for movies */}
         <form onSubmit={handleSearch}>
           <input
             type="text"
@@ -50,21 +49,10 @@ const HomePage = () => {
           />
           <button type="submit">Search</button>
         </form>
-        {/*Display search results*/}
-        <div>
-          {/*If there are search results, display them in a list*/}
-          {searchResults.length > 0 ? (
-            searchResults.map((result, index) => (
-              // Display the title and year of each movie
-              <p key={index}>
-                {result.Title} : {result.Year}
-              </p> 
-            ))
-          ) : (
-            <p>No results found. Try a different search term!</p>
-          )}
-        </div>
-        {errorMessage && <p>{errorMessage}</p>}
+
+        {/* Display search results */}
+        <SearchResults searchResults={searchResults} />
+        
       </main>
     </div>
   );

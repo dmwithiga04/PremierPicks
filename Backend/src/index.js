@@ -16,6 +16,10 @@ app.get('/search', (req, res) => {
   const searchTerm = req.query.query; // Ensure this matches the query parameter name
   console.log('Received search term:', searchTerm);
 
+  // Check if the search term is empty
+  if (!searchTerm) {
+    next('No search term provided');
+    return;};
 
   // Call the search function from db_query.js
   search(searchTerm, (err, result) => {
