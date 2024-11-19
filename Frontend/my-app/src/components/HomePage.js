@@ -34,15 +34,15 @@ const HomePage = () => {
     <div>
       <header>
         <img src="/THE_CLAPPER.png" alt="the clapper" />
-        <h1>Premier Picks v1</h1>
+        <h1>Premier Picks</h1>
       </header>
       <main>
         <p>
-          This is just a test homepage to get a hang of React! c: <br />
+          The "good movie" database!<br />
         </p>
         {/* The form below is used to search for movies */}
         <form onSubmit={handleSearch}>
-        <label for="lname">Search Movie Info: </label>
+        <label for="lname">Search Movie: </label>
           <input
             type="text"
             value={searchTerm}
