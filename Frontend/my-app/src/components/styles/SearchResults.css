@@ -19,5 +19,9 @@ td {
     padding: 20px;
     font-size: 15px;
     color:whitesmoke;
-    
+}
+
+.results-tr:hover {
+    cursor: pointer;
+    background-color: rgb(127, 191, 181, 0.3);
 }
