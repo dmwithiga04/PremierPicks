@@ -46,7 +46,7 @@ const HomePage = () => {
     <div>
       <header>
         <img src="/THE_CLAPPER.png" alt="the clapper" />
-        <h1>Premier Picks</h1>
+        <h1 className="lacquer-regular">Premier Picks</h1>
       </header>
       <main>
         <p>
