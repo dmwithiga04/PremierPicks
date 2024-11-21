@@ -1,33 +1,45 @@
-// This file contains the code for the homepage of the app.
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchResults from "./SearchResults"; // Correctly import the SearchResults component
 import "./styles/HomePage.css";
 
 const HomePage = () => {
-  // State variables
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [debounceTimeout, setDebounceTimeout] = useState(null);
 
-  // Function to handle search form submission
-  const handleSearch = async (event) => {
-    // Prevent the default form submission behavior
-    event.preventDefault();
-    setSearchResults([]); // Clear previous search results
+  // Function to handle the actual search
+  const fetchSearchResults = async (query) => {
+    if (!query) {
+      setSearchResults([]); // Clear results if query is empty
+      return;
+    }
 
-    // Make a request to the backend to search for movies
     try {
-      console.log(
-        `Making request to http://localhost:4000/search?query=${searchTerm}`
-      );
-      const response = await axios.get(
-        `http://localhost:4000/search?query=${searchTerm}`
-      );
-      console.log("Search results:", response.data); // Debugging log
+      console.log(`Making request to http://localhost:4000/search?query=${query}`);
+      const response = await axios.get(`http://localhost:4000/search?query=${query}`);
+      console.log("Search results:", response.data);
       setSearchResults(response.data);
     } catch (error) {
       console.error("Error fetching search results:", error);
     }
+  };
+
+  // Function to handle changes in the search input
+  const handleInputChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm);
+
+    // Debounce to limit requests
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout); // Clear the previous timeout
+    }
+
+    const timeout = setTimeout(() => {
+      fetchSearchResults(newSearchTerm);
+    }, 150);
+    
+    setDebounceTimeout(timeout);
   };
 
   return (
@@ -40,16 +52,15 @@ const HomePage = () => {
         <p>
           The "good movie" database!<br />
         </p>
-        {/* The form below is used to search for movies */}
-        <form onSubmit={handleSearch}>
-        <label for="lname">Search Movie: </label>
+        {/* The input below triggers a real-time search */}
+        <form onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="lname">Search Movie: </label>
           <input
             type="text"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Search..."
           />
-          <button type="Search">Search</button>
         </form>
 
         {/* Display search results */}
