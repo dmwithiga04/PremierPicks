@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./styles/SearchResults.css";
 //Component to handle and contain search results
 
@@ -24,7 +23,7 @@ export default function SearchResults(props) {
         {/* Table body */}
         <tbody>
           {props.searchResults.map((result, index) => (
-            <tr key={index}>
+            <tr key={index} className="results-tr">
               <td>{result.Title}</td>
               <td>{result.Rating}</td>
               <td>{result.Genre}</td>
