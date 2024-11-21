@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lacquer&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lacquer&family=Vibur&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lacquer&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Vibur&display=swap');
 
 /* Center the header */
 header {
@@ -13,7 +15,7 @@ header {
   font-style: normal;
   font-size: 45px;
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 
@@ -22,6 +24,15 @@ main p {
     text-align: center;
     color: white;
 }
+
+.vibur-regular {
+  font-family: "Vibur", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  margin-top: 0px;
+}
+
 
 img {
     display: block;
@@ -40,10 +51,37 @@ body {
     margin-top: 20px;
     color: white;
   }
+  /* <uniquifier>: Use a unique and descriptive class name */
+  /* <weight>: Use a value from 100 to 900 */
+
+  .sour-gummy-Search {
+    font-family: "Sour Gummy", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 20px;
+    font-variation-settings:
+      "wdth" 100;
+  }
   
   input[type="search"] {
     margin-left: 10px;
   }
+
+  .search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .search-bar:focus {
+    border-color: rgb(97, 223, 127);
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  }  
   
   input[type="submit"] {
     margin-left: 10px;
