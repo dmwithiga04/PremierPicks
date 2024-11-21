@@ -46,20 +46,21 @@ const HomePage = () => {
     <div>
       <header>
         <img src="/THE_CLAPPER.png" alt="the clapper" />
-        <h1>Premier Picks</h1>
+        <h1 className="lacquer-regular">Premier Picks</h1>
       </header>
       <main>
-        <p>
+        <p className="vibur-regular">
           The "good movie" database!<br />
         </p>
         {/* The input below triggers a real-time search */}
         <form onSubmit={(e) => e.preventDefault()}>
-          <label htmlFor="lname">Search Movie: </label>
+          {/* <label htmlFor="lname" className="sour-gummy-Search">Search Movie: </label> */}
           <input
             type="text"
+            className="search-bar"
             value={searchTerm}
             onChange={handleInputChange}
-            placeholder="Search..."
+            placeholder="Search movie..."
           />
         </form>
 
