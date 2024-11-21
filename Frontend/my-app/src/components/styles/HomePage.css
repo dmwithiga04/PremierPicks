@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lacquer&display=swap');
 
 /* Center the header */
 header {
@@ -5,6 +6,16 @@ header {
     margin-top: 20px;
     color: rgb(97, 223, 127);
 }
+
+.lacquer-regular {
+  font-family: "Lacquer", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 45px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
 
 /* Center the main p */
 main p {
