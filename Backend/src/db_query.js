@@ -21,15 +21,37 @@ con.connect(function (err) {
 });
 
 // Query the database
-function search(searchTerm, callback) {
-    con.query(
-        "SELECT * FROM movies WHERE Title LIKE ? ORDER BY Rating DESC, Year DESC LIMIT 15",
-        [`%${searchTerm}%`],
-        function (err, result, fields) {
-            if (err) return callback(err, null);
-            callback(null, result);
-        }
-    );
-}
+function search(searchTerm, filters, callback) {
+    let query = `
+      SELECT * 
+      FROM movies 
+      WHERE Title LIKE ? 
+    `;
+    const params = [`%${searchTerm}%`];
+    // Add genres filter only if there are valid genres
+    if ( filters.genres.length > 0) {
+        query += `  AND Genre LIKE ? `;
+        params.push(filters.genres);
+    }
+    // Add years filter
+    if (filters.rated.length > 0) {
+        
+        query += ` AND Certificate IN (?)`;
+        params.push(filters.rated);
+      }
+    // Order results
+    query += ` ORDER BY Rating DESC, Year DESC `;
+  
+    console.log("Executing query:", query);
+    console.log("With parameters:", params);
+  
+    con.query(query, params, (err, result) => {
+      if (err) {
+        callback(err, null);
+        return;
+      }
+      callback(null, result);
+    });
+  }
 
 module.exports = { search };
