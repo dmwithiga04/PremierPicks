@@ -14,11 +14,13 @@ th {
 
 }
 
-td {
+/*a is the Link represents the link tag in jsx, used in MovieProfile.js*/
+td, a {
     text-align: justify;
     padding: 20px;
     font-size: 15px;
     color:whitesmoke;
+    text-decoration-line: none;
 }
 
 .results-tr:hover {
