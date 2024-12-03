@@ -1,20 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
-{/* This component displays the movie profile page. It receives the movie data from the database and api*/}
 export default function MovieProfiles() {
-  // Get the current location object (results from the search)
   const location = useLocation();
-  // Extract the movie data from paramerter passed in the link
   const { dbData } = location.state || {}; // Access the passed state
 
-  {/* If there is no movie data, display a message indicating that no movie data is available. 
-    Mainly for debuging code*/}
+  const [movieData, setMovieData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (dbData) {
+      const fetchMovieData = async () => {
+        try {
+          const url = `http://img.omdbapi.com/?t=${dbData.Title}&y=${dbData.Year}&plot=full&apikey=3fb94e96`;
+          console.log(`Making request to: ${url}`);
+          const response = await axios.get(url);
+          console.log("API response:", response.data);
+          setMovieData(response.data);
+        } catch (error) {
+          console.error("Error fetching movie data:", error);
+          setError("Failed to fetch movie data. Please try again.");
+        }
+      };
+
+      fetchMovieData();
+    }
+  }, [dbData]);
+
   if (!dbData) {
     return <p>No movie data available.</p>;
   }
 
-  {/* Display the movie data */}
   return (
     <div>
       <h1>{dbData.Title}</h1>
@@ -23,6 +40,16 @@ export default function MovieProfiles() {
       <p>Certificate: {dbData.Certificate}</p>
       <p>Year: {dbData.Year}</p>
       <p>Stars: {dbData.Stars}</p>
+      {error && <p>{error}</p>}
+      {movieData && (
+        <div>
+          <h2>Additional Movie Data from API</h2>
+          <p>Plot: {movieData.Plot}</p>
+          <p>Director: {movieData.Director}</p>
+          <p>Actors: {movieData.Actors}</p>
+          {/* Add more fields as needed */}
+        </div>
+      )}
     </div>
   );
 }
