@@ -12,17 +12,25 @@ app.use(cors()); // Use the cors middleware
 app.use(bodyParser.json());
 
 app.get("/search", (req, res) => {
-  const searchTerm = req.query.query; // Ensure this matches the query parameter name
+  const searchTerm = req.query.query;
+  const filters = {
+    // Check if `req.query.genres` is an array
+    genres: Array.isArray(req.query.genres)
+        ? req.query.genres // If true, use that array
+        : req.query.genres?.split(',') || [], // Else, create an array that contains the genres 
+    rated: Array.isArray(req.query.rated)
+        ? req.query.rated
+        : req.query.rated?.split(',') || [], 
+};
   console.log("Received search term:", searchTerm);
-
-  // Check if the search term is empty
+  console.log("Filters:", filters);
+  console.log()
   if (!searchTerm) {
     res.status(400).send("Search term is required");
     return;
   }
 
-  // Call the search function from db_query.js
-  search(searchTerm, (err, result) => {
+  search(searchTerm, filters, (err, result) => {
     if (err) {
       res.status(500).send("Error querying the database");
       return;
@@ -30,8 +38,8 @@ app.get("/search", (req, res) => {
     res.send(result);
   });
 });
-
 // Start the server
 app.listen(4000, () => {
   console.log("Server is running on port 4000");
 });
+

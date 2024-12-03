@@ -21,15 +21,42 @@ con.connect(function (err) {
 });
 
 // Query the database
-function search(searchTerm, callback) {
-    con.query(
-        "SELECT * FROM movies WHERE Title LIKE ? ORDER BY Rating DESC, Year DESC LIMIT 15",
-        [`%${searchTerm}%`],
-        function (err, result, fields) {
-            if (err) return callback(err, null);
-            callback(null, result);
-        }
-    );
-}
+function search(searchTerm, filters, callback) {
+    let query = `
+      SELECT * 
+      FROM movies 
+      WHERE Title LIKE ? 
+    `;
+    const params = [`%${searchTerm}%`];
+    
+    
+    if (filters.genres.length > 0){
+      //Create individual `LIKE` conditions for each genre, joined by `AND`.
+      const genreConditions = filters.genres.map(() => `Genre LIKE ?`).join(" AND ");
+      query += ` AND (${genreConditions})`;
+
+      // Add each genre to the parameters array with `%` wildcards for partial matching.
+      params.push(...filters.genres.map((genre) => `%${genre}%`)); 
+    }
+    // Add years filter
+    if (filters.rated.length > 0) {
+      const placeholders = filters.rated.map(() => "?").join(", "); // Create placeholders like ?, ?, ?
+      query += ` AND Certificate IN (${placeholders})`;
+      params.push(...filters.rated); // Spread the array into individual values for binding
+    }
+    // Order results
+    query += ` ORDER BY Rating DESC, Year DESC `;
+  
+    console.log("Executing query:", query);
+    console.log("With parameters:", params);
+  
+    con.query(query, params, (err, result) => {
+      if (err) {
+        callback(err, null);
+        return;
+      }
+      callback(null, result);
+    });
+  }
 
 module.exports = { search };
