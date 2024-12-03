@@ -28,17 +28,22 @@ function search(searchTerm, filters, callback) {
       WHERE Title LIKE ? 
     `;
     const params = [`%${searchTerm}%`];
-    // Add genres filter only if there are valid genres
-    if ( filters.genres.length > 0) {
-        query += `  AND Genre LIKE ? `;
-        params.push(filters.genres);
+    
+    
+    if (filters.genres.length > 0){
+      //Create individual `LIKE` conditions for each genre, joined by `AND`.
+      const genreConditions = filters.genres.map(() => `Genre LIKE ?`).join(" AND ");
+      query += ` AND (${genreConditions})`;
+
+      // Add each genre to the parameters array with `%` wildcards for partial matching.
+      params.push(...filters.genres.map((genre) => `%${genre}%`)); 
     }
     // Add years filter
     if (filters.rated.length > 0) {
-        
-        query += ` AND Certificate IN (?)`;
-        params.push(filters.rated);
-      }
+      const placeholders = filters.rated.map(() => "?").join(", "); // Create placeholders like ?, ?, ?
+      query += ` AND Certificate IN (${placeholders})`;
+      params.push(...filters.rated); // Spread the array into individual values for binding
+    }
     // Order results
     query += ` ORDER BY Rating DESC, Year DESC `;
   

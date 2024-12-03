@@ -51,7 +51,7 @@ const HomePage = () => {
     }
 
     const timeout = setTimeout(() => {
-      fetchSearchResults(newSearchTerm);
+      fetchSearchResults(newSearchTerm, filters);
     }, 150);
     
     setDebounceTimeout(timeout);
@@ -63,19 +63,27 @@ const HomePage = () => {
   // Handle checkbox changes
   const handleCheckboxChange = (filterType, value) => {
     setFilters((prevFilters) => {
+      // Get the current values of the specified filter type (e.g., "genres" or "rated")
       const currentValues = prevFilters[filterType];
+      
+      // Determine the updated values:
+      // - If the value is already selected, remove it (filter it out)
+      // - Otherwise, add the value to the list (spread the existing values and append the new value)
       const updatedValues = currentValues.includes(value)
-        ? currentValues.filter((v) => v !== value) 
-        : [...currentValues, value]; 
+        ? currentValues.filter((v) => v !== value) // Remove the value if it already exists
+        : [...currentValues, value]; // Add the value if it doesn't exist
+
+      // Return the updated filters object:
+      // - Spread the previous filter state
+      // - Update the specified filter type with the new values
       return { ...prevFilters, [filterType]: updatedValues };
     });
   };
 
   // Apply filters
-  const applyFilters = () => {
+  useEffect(() => {
     fetchSearchResults(searchTerm, filters);
-    setIsFilterBoxVisible(false); 
-  };
+  }, [filters]);
 
   return (
     <div>
@@ -113,7 +121,9 @@ const HomePage = () => {
                 <input
                   type="checkbox"
                   checked={filters.rated.includes(rated)}
+                  // If the current rating is in `filters.rated`, the checkbox is checked
                   onChange={() => handleCheckboxChange("rated", rated)}
+                  // Calls the handler to update the state when the checkbox is toggled                  
                 />
                 {rated}
               </label>
@@ -129,16 +139,15 @@ const HomePage = () => {
                 <input
                   type="checkbox"
                   checked={filters.genres.includes(genre)}
+                  // If the current genre is in `filters.genres`, the checkbox is checked
                   onChange={() => handleCheckboxChange("genres", genre)}
+                  // Calls the handler to update the state when the checkbox is toggled
                 />
                 {genre}
               </label>
             ))}
           </div>
-          {/* Apply Filters Button */}
-          <button className="applyFilterbtt" onClick={applyFilters}>
-            Filter
-          </button>
+          
         </div>
         )}
 
