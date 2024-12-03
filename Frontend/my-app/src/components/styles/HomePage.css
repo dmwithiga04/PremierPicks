@@ -86,3 +86,79 @@ body {
   input[type="submit"] {
     margin-left: 10px;
   }
+.filter-button {
+  background-color: #b5b5b5;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.filter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 900px; 
+  margin: 10px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.applyFilterbtt:hover {
+  background-color: #026bda;
+} 
+.filter-box div {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 0px; 
+}
+
+.filter-box h7 {
+  font-size: 18px;
+  margin-top: 0px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  flex-basis: 100%; 
+}
+
+.filter-box label {
+  display: flex;
+  gap: 0px;
+  font-size: 16px;
+  color: #000000;
+  font-family: Arial, sans-serif;
+}
+
+
+.applyFilterbtt {
+  padding: 5px 25px;
+  background-color: #0e82ff;
+  color: white;
+  font-size: 16px;
+  font-family: Roboto,Arial;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 20px; 
+  
+  align-self: flex-start; 
+}
+
+/* Apply a grid layout for Genre and Country sections */
+.filter-box .genre,.filter-box .releaseyear{
+  gap: 8px;
+}
