@@ -14,9 +14,14 @@ app.use(bodyParser.json());
 app.get("/search", (req, res) => {
   const searchTerm = req.query.query;
   const filters = {
-    rated: req.query.rated || "",
-    genres: req.query.genres || "", // Default to empty if not provided
-  };
+    // Check if `req.query.genres` is an array
+    genres: Array.isArray(req.query.genres)
+        ? req.query.genres // If true, use that array
+        : req.query.genres?.split(',') || [], // Else, create an array that contains the genres 
+    rated: Array.isArray(req.query.rated)
+        ? req.query.rated
+        : req.query.rated?.split(',') || [], 
+};
   console.log("Received search term:", searchTerm);
   console.log("Filters:", filters);
   console.log()
