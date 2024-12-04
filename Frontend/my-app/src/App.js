@@ -9,9 +9,9 @@ function App() {
     // Routes to define the routes for the application
     <Router>
       <Routes>
-        // Route to the home page
+        {/*Route to the home page*/}
         <Route path="/" element={<HomePage />} />
-        // Route to the movie profile page
+        {/*Route to the movie profile page*/}
         <Route path="/movie-profile" element={<MovieProfiles />} />
       </Routes>
     </Router>

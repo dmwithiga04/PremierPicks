@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+# Api keys
+/src/apikeys 
+
 # build output
 /build
 
