@@ -13,7 +13,7 @@ header {
   font-family: "Lacquer", system-ui;
   font-weight: 400;
   font-style: normal;
-  font-size: 45px;
+  font-size: 60px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -51,8 +51,6 @@ body {
     margin-top: 20px;
     color: white;
   }
-  /* <uniquifier>: Use a unique and descriptive class name */
-  /* <weight>: Use a value from 100 to 900 */
 
   .sour-gummy-Search {
     font-family: "Sour Gummy", sans-serif;
@@ -69,8 +67,8 @@ body {
   }
 
   .search-bar {
-    width: 100%;
-    max-width: 400px;
+    width: 120%;
+    max-width: 450px;
     padding: 10px;
     font-size: 1rem;
     border: 2px solid #ccc;
