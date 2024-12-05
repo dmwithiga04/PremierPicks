@@ -8,10 +8,9 @@ const HomePage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [debounceTimeout, setDebounceTimeout] = useState(null);
 
-  // Function to handle the actual search
   const fetchSearchResults = async (query) => {
     if (!query) {
-      setSearchResults([]); // Clear results if query is empty
+      setSearchResults([]);
       return;
     }
 
@@ -30,15 +29,12 @@ const HomePage = () => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
 
-    // Debounce to limit requests
     if (debounceTimeout) {
-      clearTimeout(debounceTimeout); // Clear the previous timeout
+      clearTimeout(debounceTimeout);
     }
-
     const timeout = setTimeout(() => {
       fetchSearchResults(newSearchTerm);
     }, 150);
-    
     setDebounceTimeout(timeout);
   };
 
@@ -49,12 +45,7 @@ const HomePage = () => {
         <h1 className="lacquer-regular">Premier Picks</h1>
       </header>
       <main>
-        <p className="vibur-regular">
-          The "good movie" database!<br />
-        </p>
-        {/* The input below triggers a real-time search */}
         <form onSubmit={(e) => e.preventDefault()}>
-          {/* <label htmlFor="lname" className="sour-gummy-Search">Search Movie: </label> */}
           <input
             type="text"
             className="search-bar"
@@ -63,12 +54,9 @@ const HomePage = () => {
             placeholder="Search movie..."
           />
         </form>
-
-        {/* Display search results */}
         <SearchResults searchResults={searchResults} />
       </main>
     </div>
   );
 };
-
 export default HomePage;
