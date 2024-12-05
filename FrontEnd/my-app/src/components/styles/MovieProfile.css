@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.bg {
+    background-color: black;
+    background-image: url('./bg/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main {
+    background-color: rgba(240, 248, 255, 0.95);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+    width: 100%;
+    color: black;
+    display: flex;
+    gap: 20px;
+}
+
+.desc {
+    font-size: 22px;
+    padding-left: 10px;
+    padding-right: 30px;
+    line-height: 1.6;
+    max-width: 90%;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contentWrapper {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.leftColumn {
+    flex: 2;
+}
+
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.rightColumn p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.rightColumn strong {
+    font-weight: bold;
+}
+
+.rightColumn .extraContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.rightColumn .extraContent p {
+    margin-bottom: 10px;
+}
+
+.rightColumn p, .rightColumn h2, .rightColumn h3 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.rating, .stars, .certificate, .genre, .year {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.coverImage {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.movieInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.movieInfo h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.movieInfo p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.director {
+    color: #1e90ff;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.director:hover {
+    color: #ff6347;
+    text-decoration: underline;
+}
+
+.director:active {
+    color: #8b0000;
+}
+
+.star {
+    color: #1e90ff;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.star:hover {
+    color: #ff6347;
+    text-decoration: underline;
+}
+
+.star:active {
+    color: #8b0000;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.streamingIcons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-top: 15px;
+}
+
+.streamingIcons img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.streamingIcons img:hover {
+    transform: scale(1.1);
+}
+
+.additionalInfo {
+    font-size: 1rem;
+    text-align: left;
+    margin-top: 0px;
+}
+
+.additionalInfo p {
+    margin-bottom: 10px;
+}
+
+.extraContent {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8aa1ba;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+nav a:hover {
+    background-color: #323b45;
+    transform: scale(1.05);
+}
+
+nav a:active {
+    background-color: #373e44;
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .contentWrapper {
+        flex-direction: column;
+    }
+
+    .coverImage {
+        margin: 0 auto;
+    }
+
+    .leftColumn, .rightColumn {
+        width: 100%;
+    }
+}
+
+

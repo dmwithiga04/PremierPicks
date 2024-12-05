@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SearchResults from "./SearchResults"; // Correctly import the SearchResults component
-
+import SearchResults from "./SearchResults";
 import "./styles/HomePage.css";
 
 const HomePage = () => {
@@ -84,17 +83,13 @@ const HomePage = () => {
   useEffect(() => {
     fetchSearchResults(searchTerm, filters);
   }, [filters]);
-
   return (
-    <div>
+    <div className="home">
       <header>
-        <img src="/THE_CLAPPER.png" alt="the clapper" />
+        <img src="/THE_CLAPPER.png" alt="the clapper" className="Logo"/>
         <h1 className="lacquer-regular">Premier Picks</h1>
       </header>
       <main>
-        <p className="vibur-regular">
-          The "good movie" database!<br />
-        </p>
         {/* The input below triggers a real-time search */}
         <div className="search-filter-container">
           <input
@@ -147,7 +142,6 @@ const HomePage = () => {
               </label>
             ))}
           </div>
-          
         </div>
         )}
 

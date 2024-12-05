@@ -2,24 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Lacquer&family=Vibur&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lacquer&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Vibur&display=swap');
 
-/* Center the header */
 header {
     text-align: center;
     margin-top: 20px;
-    color: rgb(97, 223, 127);
+    color: rgb(223, 232, 236);
 }
 
 .lacquer-regular {
   font-family: "Lacquer", system-ui;
   font-weight: 400;
   font-style: normal;
-  font-size: 45px;
+  font-size: 65px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-
-/* Center the main p */
 main p {
     text-align: center;
     color: white;
@@ -42,17 +39,15 @@ img {
     height: auto;
 }
 
-body { 
-    background-color: #23272f
+body {
+  background-image: linear-gradient(to right,#af5f5f, #eb9f9f);
 }
-  /* Center the form and add spacing */
+
   form {
     text-align: center;
     margin-top: 20px;
     color: white;
   }
-  /* <uniquifier>: Use a unique and descriptive class name */
-  /* <weight>: Use a value from 100 to 900 */
 
   .sour-gummy-Search {
     font-family: "Sour Gummy", sans-serif;
@@ -70,7 +65,8 @@ body {
 
   .search-bar {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
+    height: 40px;
     padding: 10px;
     font-size: 1rem;
     border: 2px solid #ccc;
@@ -79,7 +75,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   .search-bar:focus {
-    border-color: rgb(97, 223, 127);
+    border-color: rgb(97, 202, 223);
     box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
   }  
   
@@ -128,7 +124,7 @@ body {
 }
 
 .filter-box h7 {
-  font-size: 18px;
+  font-size: 28px;
   margin-top: 0px;
   font-family: Arial, sans-serif;
   color: #333;
@@ -137,8 +133,8 @@ body {
 
 .filter-box label {
   display: flex;
-  gap: 0px;
-  font-size: 16px;
+  gap: 5px;
+  font-size: 26px;
   color: #000000;
   font-family: Arial, sans-serif;
 }
@@ -158,7 +154,6 @@ body {
   align-self: flex-start; 
 }
 
-/* Apply a grid layout for Genre and Country sections */
 .filter-box .genre,.filter-box .releaseyear{
   gap: 8px;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";//
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
+import "./styles/MovieProfile.css";
 //Component to handle and display movie profiles
 //This component fetches additional movie data from the OMDB API and streaming data from the RapidAPI
 //It also displays the movie details and streaming availability
@@ -117,143 +117,115 @@ export default function MovieProfiles() {
   ];
 
   return (
-    <div>
-      {/*Navigation to go back to the home page*/}
-      <nav>
-        <Link to="/">Go Home</Link>
-      </nav>
-
-      {/*Display the movie title*/}
-      <h1>{dbData.Title}</h1>
-      {/*Display the movie poster if available*/}
-      {movieData && <img src={movieData.Poster} alt={movieData.Title} />}
-
-      {/*Display the movie details from the*/}
-      <p>
-        <strong>Rating &#11088;:</strong> {dbData.Rating}
-      </p>
-      <p>
-        <strong>Genre:</strong> {dbData.Genre}
-      </p>
-      <p>
-        <strong>Certificate:</strong> {dbData.Certificate}
-      </p>
-      <p>
-        <strong>Year:</strong> {dbData.Year}
-      </p>
-      <div></div>
-      {/*Display the error message if there is an error*/}
-      {error && <p>{error}</p>}
-
-      {/*Display the additional movie data from the OMDB API*/}
-      {movieData && (
-        <div>
-          <h2>Plot:</h2>
-          <p>{movieData.Plot}</p>
-
-          <h2>Director</h2>
-          {/*Display the director as a link to Google search their bio*/}
-          <a
-            href={`https://www.google.com/search?q=${encodeURIComponent(
-              movieData.Director
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {movieData.Director}
-          </a>
-
-          <h3>Stars:</h3>
-          {/*Display the stars as links to Google search their bio's in a list*/}
-          <ul>
-            {/*Map through the stars array and display them as links*/}
-            {dbData.Stars.split(", ").map((star, index) => (
-              <li>
-                <a
-                  key={index}
-                  href={`https://www.google.com/search?q=${encodeURIComponent(
-                    star
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {star}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <div className="bg">
+      <div className="main">
+        <nav>
+          <Link to="/">Go Home</Link>
+        </nav>
+  
+        <div className="contentWrapper">
+          {/* Left Column: Title, Description, Streaming Availability */}
+          <div className="leftColumn">
+            <h1>{dbData.Title}</h1>
+            {movieData && <p className="desc">{movieData.Plot}</p>}
+  
+            {streamingData && (
+              <div className="streamingIcons">
+                <h2>Streaming Availability:</h2>
+                {(() => {
+                  const renderedServices = new Set();
+                  return streamingData.streamingOptions.us.map((option, index) => {
+                    let serviceName = "";
+                    if (option.link.includes("amazon")) serviceName = "Amazon";
+                    else if (option.link.includes("disneyplus")) serviceName = "Disney+";
+                    else if (option.link.includes("hbo")) serviceName = "HBO";
+                    else if (option.link.includes("hulu")) serviceName = "Hulu";
+                    else if (option.link.includes("netflix")) serviceName = "Netflix";
+                    else if (option.link.includes("apple")) serviceName = "Apple TV";
+                    else if (option.link.includes("max")) serviceName = "Max";
+  
+                    if (
+                      !specifiedStreamingSites.includes(serviceName.toLowerCase()) ||
+                      renderedServices.has(serviceName)
+                    ) {
+                      return null;
+                    }
+  
+                    renderedServices.add(serviceName);
+  
+                    return (
+                      <div key={index}>
+                        <p>
+                          <a href={option.link} target="_blank" rel="noopener noreferrer">
+                            <img
+                              src={`/${serviceName}.png`}
+                              width="60px"
+                              height="60px"
+                              alt={`${serviceName} logo`}
+                            />
+                          </a>
+                        </p>
+                      </div>
+                    );
+                  });
+                })()}
+              </div>
+            )}
+          </div>
+  
+          {/* Right Column: Poster at Top, Rest Below */}
+          <div className="rightColumn">
+            {movieData && (
+              <img src={movieData.Poster} alt={movieData.Title} className="coverImage" />
+            )}
+            <div className="additionalInfo">
+              <p>
+                <strong>Rating:</strong> {dbData.Rating}
+              </p>
+              <p>
+                <strong>Genre:</strong> {dbData.Genre}
+              </p>
+              <p>
+                <strong>Certificate:</strong> {dbData.Certificate}
+              </p>
+              <p>
+                <strong>Year:</strong> {dbData.Year}
+              </p>
+  
+              {movieData && (
+                <>
+                  <h2>Director:</h2>
+                  <a
+                    href={`https://www.google.com/search?q=${encodeURIComponent(
+                      movieData.Director
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="director"
+                  >
+                    {movieData.Director}
+                  </a>
+                  <h3>Starring:</h3>
+                  <ul>
+                    {dbData.Stars.split(", ").map((star, index) => (
+                      <li key={index}>
+                        <a
+                          href={`https://www.google.com/search?q=${encodeURIComponent(star)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="star"
+                        >
+                          {star}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </div>
         </div>
-      )}
-      {streamingData && (
-        <div>
-          <h2>Streaming Availability:</h2>
-          {/*Display the streaming services where the movie is available*/}
-          {(() => {
-            {
-              /*Create a set to store the rendered services*/
-            }
-            {
-              /*used a set to avoid rendering the same service multiple times*/
-            }
-            const renderedServices = new Set();
-            return streamingData.streamingOptions.us.map((option, index) => {
-              let serviceName = "";
-              if (option.link.includes("amazon")) {
-                serviceName = "Amazon";
-              } else if (option.link.includes("disneyplus")) {
-                serviceName = "Disney+";
-              } else if (option.link.includes("hbo")) {
-                serviceName = "HBO";
-              } else if (option.link.includes("hulu")) {
-                serviceName = "Hulu";
-              } else if (option.link.includes("netflix")) {
-                serviceName = "Netflix";
-              } else if (option.link.includes("apple")) {
-                serviceName = "Apple TV";
-              } else if (option.link.includes("max")) {
-                serviceName = "Max";
-              }
-
-              {
-                /*Check if the service is in the specified streaming sites and not already rendered*/
-              }
-              {
-                /*using specifiedStreamingSites array to filter out unwanted services*/
-              }
-              if (
-                !specifiedStreamingSites.includes(serviceName.toLowerCase()) ||
-                renderedServices.has(serviceName)
-              ) {
-                return null;
-              }
-
-              {
-                /*Add the service to the rendered services set*/
-              }
-              renderedServices.add(serviceName);
-
-              return (
-                <div key={index}>
-                  <p>
-                    <a
-                      href={option.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={`/${serviceName}.png`}
-                        width="40px"
-                        height="40px"
-                        alt={`${serviceName} logo`}
-                      />
-                    </a>
-                  </p>
-                </div>
-              );
-            });
-          })()}
-        </div>
-      )}
+      </div>
     </div>
-  );
+  );  
 }

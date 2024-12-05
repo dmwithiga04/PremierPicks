@@ -1,29 +1,53 @@
-/*result table styling*/
-
 table {
     margin-left: auto;
     margin-right: auto;
     text-align: justify;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 th {
     text-align: left;
     font-size: 30px;
-    color: rgb(97, 223, 127);
+    color: rgb(226, 231, 235);
     padding: 20px;
-
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
 }
 
-/*a is the Link represents the link tag in jsx, used in MovieProfile.js*/
 td, a {
     text-align: justify;
     padding: 20px;
-    font-size: 15px;
-    color:whitesmoke;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
     text-decoration-line: none;
+    
+}
+
+.results-tr {
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .results-tr:hover {
     cursor: pointer;
-    background-color: rgb(127, 191, 181, 0.3);
+    background-color: rgb(127, 191, 181, 0.5);
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: rgb(29, 62, 89);
+}
+
+td {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
